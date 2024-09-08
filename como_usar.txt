@@ -1,0 +1,2 @@
+1: passo crie uma env com a url de conexao do seu banco mongodb
+2:instale as dependencias do package.json

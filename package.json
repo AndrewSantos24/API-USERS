@@ -1,0 +1,20 @@
+{ 
+  "name": "my-new-project",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "tsc",
+    "start": "ts-node src/app.ts",
+    "dev": "ts-node src/app.ts"
+  },
+
+  "dependencies": {
+    "@prisma/client": "^5.19.1",
+    "@types/express": "^4.17.21",
+    "@types/node": "^22.5.4",
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.4"
+  }
+}

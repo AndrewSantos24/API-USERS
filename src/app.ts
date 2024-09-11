@@ -26,8 +26,32 @@ app.post('/usuarios', async (req: Request<{}, {}, UserRequestBody>, res: Respons
 });
 
 app.get('/usuarios', async (req: Request, res: Response) => {
-  const users = await prisma.user.findMany();
-  res.status(200).json(users);
+  const { name, email, age } = req.query;
+  
+  // Construa o filtro dinamicamente
+  const filter: any = {};
+  
+  if (name) {
+    filter.name = name;
+  }
+  if (email) {
+    filter.email = email;
+  }
+  if (age) {
+    filter.age = String(age as string);
+  }
+
+  try {
+    // Se não houver filtros, o objeto `filter` será vazio e retornará todos os usuários
+    const users = await prisma.user.findMany({
+      where: Object.keys(filter).length > 0 ? filter : undefined,
+    });
+    
+    res.status(200).json(users);
+  } catch (error) {
+    console.error('Erro ao buscar usuários:', error);
+    res.status(500).json({ error: 'Erro ao buscar usuários' });
+  }
 });
 
 app.put('/usuarios/:id', async (req: Request<{ id: string }, {}, UserRequestBody>, res: Response) => {
